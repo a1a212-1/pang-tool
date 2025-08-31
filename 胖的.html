@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-<link rel="stylesheet" href="胖的.css">
-
 <head>
     <meta charset="UTF-8">
     <title>🌈你是Gay嗎</title>
+    <link rel="stylesheet" href="胖的.css">
     <style>
+        /* 如果你沒有外部 CSS，可以保留這裡的內嵌 CSS */
         body {
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(120deg, #f6d365, #fda085);
@@ -75,10 +75,10 @@
     </div>
 
     <script>
-        // 特殊 ID 彩蛋
+        // 特殊 ID / 名稱彩蛋
         const specialResults = {
             "小夢": 0,
-            "Pud": 100
+            "Pud": 100,
             "胖的": 100
         };
 
@@ -88,14 +88,14 @@
         function checkGay() {
             const user = document.getElementById("username").value.trim();
             if (!user) {
-                alert("請輸入名字！");
+                alert("請輸入名字或ID！");
                 return;
             }
 
             let percent;
-            if (specialResults[user]) {
+            if (specialResults[user] !== undefined) {
                 percent = specialResults[user];
-            } else if (results[user]) {
+            } else if (results[user] !== undefined) {
                 percent = results[user];
             } else {
                 percent = Math.floor(Math.random() * 101);
@@ -107,5 +107,3 @@
     </script>
 </body>
 </html>
-
-
