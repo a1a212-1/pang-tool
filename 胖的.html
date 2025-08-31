@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<link rel="stylesheet" href="胖的.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Gay 指令測試器 🌈</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #f6d365, #fda085);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 50px;
+        }
+
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            background-color: rgba(255,255,255,0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 300px;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ff69b4;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background: #ff69b4;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #ff85c1;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff1493;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gay 指令測試器 🌈</h1>
+    <div class="container">
+        <input type="text" id="username" placeholder="輸入名字或ID">
+        <br>
+        <button onclick="checkGay()">測試!</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // 特殊 ID 彩蛋
+        const specialResults = {
+            "1202959743220588585": 0,
+            "1386174437358960710": 100
+        };
+
+        // 已記錄結果，防止重複
+        const results = {};
+
+        function checkGay() {
+            const user = document.getElementById("username").value.trim();
+            if (!user) {
+                alert("請輸入名字或 ID！");
+                return;
+            }
+
+            let percent;
+            if (specialResults[user]) {
+                percent = specialResults[user];
+            } else if (results[user]) {
+                percent = results[user];
+            } else {
+                percent = Math.floor(Math.random() * 101);
+                results[user] = percent;
+            }
+
+            document.getElementById("result").innerText = `${user} 你 ${percent}% 是蓋 🌈`;
+        }
+    </script>
+</body>
+</html>
