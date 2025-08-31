@@ -1,108 +1,122 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <title>🌈你是Gay嗎</title>
-    <style>
-        /* CSS 全部內嵌 */
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(120deg, #f6d365, #fda085);
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-height: 100vh;
-            margin: 0;
-            padding-top: 50px;
-        }
+<meta charset="UTF-8">
+<title>🌈你是Gay嗎</title>
+<style>
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
 
-        h1 {
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
+h1 {
+    color: #fff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
 
-        .container {
-            background-color: rgba(255,255,255,0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            text-align: center;
-            width: 300px;
-        }
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.95);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
 
-        input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #ff69b4;
+    margin-bottom: 10px;
+}
 
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 10px;
-            background: #ff69b4;
-            color: #fff;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #ff69b4;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
 
-        button:hover {
-            background: #ff85c1;
-        }
+button:hover {
+    background: #ff85c1;
+}
 
-        #result {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff1493;
-        }
-    </style>
+#chat {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 15px;
+    background: #f0f0f0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message.special {
+    background: #ffb6c1;
+    color: #fff;
+    font-weight: bold;
+}
+</style>
 </head>
 <body>
-    <h1>Gay 指令測試器 🌈</h1>
-    <div class="container">
-        <input type="text" id="username" placeholder="輸入名字或ID">
-        <br>
-        <button onclick="checkGay()">測試!</button>
-        <div id="result"></div>
-    </div>
 
-    <script>
-        // 特殊 ID / 名稱彩蛋
-        const specialResults = {
-            "小夢": 0,
-            "Pud": 100,
-            "胖的": 100
-        };
+<h1>Gay 指令測試器 🌈</h1>
+<div class="container">
+    <input type="text" id="username" placeholder="輸入名字或ID">
+    <button onclick="checkGay()">測試!</button>
+    <div id="chat"></div>
+</div>
 
-        // 已記錄結果，防止重複
-        const results = {};
+<script>
+const specialResults = {
+    "小夢": 0,
+    "Pud": 100,
+    "胖的": 100
+};
 
-        function checkGay() {
-            const user = document.getElementById("username").value.trim();
-            if (!user) {
-                alert("請輸入名字或ID！");
-                return;
-            }
+const results = {};
 
-            let percent;
-            if (specialResults[user] !== undefined) {
-                percent = specialResults[user];
-            } else if (results[user] !== undefined) {
-                percent = results[user];
-            } else {
-                percent = Math.floor(Math.random() * 101);
-                results[user] = percent;
-            }
+function checkGay() {
+    const user = document.getElementById("username").value.trim();
+    if (!user) {
+        alert("請輸入名字或ID！");
+        return;
+    }
 
-            document.getElementById("result").innerText = `${user} 你 ${percent}% 是蓋 🌈`;
-        }
-    </script>
+    let percent;
+    if (specialResults[user] !== undefined) {
+        percent = specialResults[user];
+    } else if (results[user] !== undefined) {
+        percent = results[user];
+    } else {
+        percent = Math.floor(Math.random() * 101);
+        results[user] = percent;
+    }
+
+    const chat = document.getElementById("chat");
+    const msg = document.createElement("div");
+    msg.classList.add("message");
+    if (percent === 0 || percent === 100) msg.classList.add("special");
+    msg.innerText = `${user} 你 ${percent}% 是蓋 🌈`;
+
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
 </body>
 </html>
